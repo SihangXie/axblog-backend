@@ -33,6 +33,11 @@ public class JSONResult<T> {
         this.msg = HttpCodeMsg.SUCCESS.getMsg();
     }
 
+    public JSONResult(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public JSONResult(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;

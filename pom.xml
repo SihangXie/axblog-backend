@@ -12,32 +12,173 @@
     <groupId>cn.axblog</groupId>
     <artifactId>axblog-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <!-- 只有父工程的打包方式是pom，所有子工程都将共同打包 -->
     <packaging>pom</packaging>
     <name>axblog-backend</name>
 
     <description>axblog-backend</description>
+
+    <!-- 子工程 -->
     <modules>
         <module>axblog-framework</module>
         <module>axblog-admin</module>
         <module>axblog-website</module>
     </modules>
 
+    <!-- 属性：版本统一管理 -->
     <properties>
         <java.version>1.8</java.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <mybatis-plus.version>3.4.3</mybatis-plus.version>
+        <swagger2.version>2.6.0</swagger2.version>
+        <easyexcel.version>3.0.5</easyexcel.version>
+        <hutool.version>5.8.8</hutool.version>
+        <caffeine.version>2.6.2</caffeine.version>
     </properties>
 
     <dependencies>
+        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- Spring Boot Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- 下面的都是用于继承的依赖 -->
+
+        <!-- Spring Web依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--AOP-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!--lombok实体类快捷开发-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!--Spring Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- jjwt包 -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
+        <!--Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- common-pool连接池依赖 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <!--MyBatis-Plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!--MySQL数据库驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--Swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--Swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--处理Excel文档-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.version}</version>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Hutool工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+        <!-- 本地缓存之王Caffeine -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine.version}</version>
+        </dependency>
+
     </dependencies>
+
+    <!-- 配置多环境开发 -->
+    <profiles>
+        <!-- 开发环境 -->
+        <profile>
+            <id>env-dep</id>
+            <properties>
+                <jdbc.url>jdbc:mysql://114.115.213.72:3306/axblog?useSSL=false</jdbc.url>
+            </properties>
+            <activation>
+                <!-- 设置为默认启动的环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!-- 测试环境 -->
+        <profile>
+            <id>env-test</id>
+            <properties>
+                <jdbc.url>jdbc:mysql://114.115.213.72:3306/axblog?useSSL=false</jdbc.url>
+            </properties>
+        </profile>
+        <!-- 生产环境 -->
+        <profile>
+            <id>env-pro</id>
+            <properties>
+                <jdbc.url>jdbc:mysql://114.115.213.72:3306/axblog?useSSL=false</jdbc.url>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>

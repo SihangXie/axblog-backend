@@ -26,7 +26,8 @@ public enum HttpCodeMsg {
     REQUIRE_USERNAME(504, "必须填写用户名"),
     LOGIN_ERROR(505, "用户名或密码错误"),
     USER_PARAMETER_ERROR(506, "必须填写Token"),
-    USER_TOKEN_EXPIRE(507, "Token已过期，请重新登录");
+    USER_TOKEN_EXPIRE(507, "Token已过期，请重新登录"),
+    UNKNOWN_EXCEPTION(555, "未知错误");
 
     private final Integer code;
     private final String msg;
@@ -43,5 +44,5 @@ public enum HttpCodeMsg {
     public String getMsg() {
         return msg;
     }
-    
+
 }

@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
-package cn.axblog.utils;
+package cn.axblog.domain.vo;
 
-/**
- * 各种拷贝工具
- */
-public class CopyUtils {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserInfoVo {
+
+    //用户ID
+    private Long id;
+    //昵称
+    private String nickName;
+    //用户性别：0男；1女；2保密
+    private String sex;
+    //头像
+    private String avatar;
+    //邮箱
+    private String email;
 }
